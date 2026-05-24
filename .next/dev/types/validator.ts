@@ -59,4 +59,3 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
   // @ts-ignore
   type __Unused = __Check
 }
-../../../app/RsvpForm.js

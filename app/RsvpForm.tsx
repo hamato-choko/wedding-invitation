@@ -1,13 +1,9 @@
+// app/RsvpForm.tsx
 "use client";
 
 import { useState } from "react";
 
-export const metadata = {
-  title: "ご出欠のお伺い | Wedding Invitation",
-  description: "ご結婚式のご出欠登録フォームです。必要事項をご記入の上、ご回答をお願いいたします。",
-};
-
-export default function RsvpPage() {
+export default function RsvpForm() {
   const [formData, setFormData] = useState({
     name: "",
     furigana: "",
@@ -35,7 +31,6 @@ export default function RsvpPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      // Amplify Gen 2 のデータストア等へ接続する処理はここに実装します
       console.log("送信されたデータ:", formData);
       setSubmitted(true);
     } catch (err) {
@@ -45,301 +40,440 @@ export default function RsvpPage() {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-50 flex items-center justify-center py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-2xl w-full space-y-8 bg-white p-6 sm:p-10 rounded-2xl shadow-sm border border-gray-100">
-        <div>
-          <h2 className="mt-2 text-center text-3xl font-serif font-bold text-gray-800 tracking-wide">
-            Wedding Invitation
-          </h2>
-          <p className="mt-2 text-center text-sm font-medium text-gray-500 tracking-widest">
-            ご出欠のお伺い
-          </p>
+    <div className="min-h-screen bg-stone-100 flex items-center justify-center py-8 px-4 sm:px-6 lg:px-8">
+      {/* 招待状カードの背景を「暗い赤 (bg-red-950)」に設定 */}
+      <div className="max-w-2xl w-full space-y-8 bg-red-950 rounded-2xl shadow-2xl border border-red-900/50 overflow-hidden text-stone-100">
+        
+        {/* 1. メインビジュアル画像 */}
+        <div className="w-full aspect-[4/3] sm:aspect-[16/9] overflow-hidden bg-red-950/50">
+          <img 
+            src="/images/wedding_invitation.jpg" 
+            alt="Wedding Invitation Main Visual" 
+            className="w-full h-full object-cover"
+          />
         </div>
 
-        {submitted ? (
-          /* =========================================================
-             【修正】送信完了後の画面（ここには情報セクションを表示しない）
-             ========================================================= */
-          <div className="text-center py-12 space-y-4">
-            <div className="text-green-500 text-6xl animate-bounce">✓</div>
-            <h3 className="text-xl font-semibold text-gray-900">
-              ご回答ありがとうございました
-            </h3>
-            <p className="text-sm text-gray-600 max-w-md mx-auto leading-relaxed">
-              新郎新婦へ情報が送信されました。<br />
-              当日お会いできることを楽しみにしております。
+        <div className="p-6 sm:p-10 space-y-10">
+          {/* タイトル */}
+          <div className="text-center space-y-2">
+            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-amber-100 tracking-wide">
+              Wedding Invitation
+            </h2>
+            <p className="text-xs font-medium text-stone-300 tracking-widest">
+              ご出欠のお伺い
             </p>
           </div>
-        ) : (
-          /* =========================================================
-             送信前の画面（情報セクション ＋ 入力フォームを表示）
-             ========================================================= */
-          <>
-            {/* 会場・日時情報セクション */}
-            <div className="bg-neutral-50 rounded-xl p-5 sm:p-6 space-y-4 border border-neutral-100 text-sm text-gray-700">
-              <h3 className="font-bold text-base text-gray-800 border-b border-gray-200 pb-2 font-serif">
-                Information
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                <span className="font-semibold text-gray-500">日時 / 集合時間</span>
-                <span className="sm:col-span-2 text-gray-800 font-medium">
-                  2026年 8月 8日（土） <br />
-                  <span className="text-indigo-600 font-semibold">【受付開始】 13:00 </span> 
-                  <span className="text-gray-400">/</span> 【挙式開始】 14:00
-                </span>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-2 border-t border-dashed border-gray-200">
-                <span className="font-semibold text-gray-500">式場名</span>
-                <span className="sm:col-span-2 text-gray-800 font-medium">
-                  ララシャンスKOBE（LaLa Chance KOBE）<br />
-                  <a 
-                    href="https://www.ikk-wed.jp/kobe/access" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="text-xs text-indigo-600 underline hover:text-indigo-800 inline-block mt-1"
-                  >
-                    公式アクセスサイトを見る ↗
-                  </a>
-                </span>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-2 border-t border-dashed border-gray-200">
-                <span className="font-semibold text-gray-500">住所</span>
-                <span className="sm:col-span-2 text-gray-600">
-                  〒650-0045 兵庫県神戸市中央区港島波止場2
-                </span>
-              </div>
+
+          {/* 2. Message セクション */}
+          <div className="text-center space-y-4 py-6 border-y border-red-900/60">
+            <h3 className="text-2xl font-serif italic text-amber-200 tracking-wider">
+              Message
+            </h3>
+            <div className="text-sm sm:text-base text-stone-200 leading-loose tracking-widest space-y-6 font-serif">
+              <p>皆様いかがお過ごしでしょうか</p>
+              <p>このたび 結婚式を<br />執り行うこととなりました</p>
               
-              {/* Googleマップ埋め込み */}
-              <div className="w-full overflow-hidden rounded-lg border border-gray-200 aspect-video mt-3">
-                <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3281.5634455047357!2d135.2023265!3d34.6657264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60008fa30bb1cc2f%3A0x5158554b8b78d2a!2z44Op44Op44K344Oj44Oz44K5S09CRe-8iOelnuaIuOW4giDntZDlqZrlvI_loLTvvIk!5e0!3m2!1sja!2sjp!4v1779037088985!5m2!1sja!2sjp" 
-                  className="w-full h-full border-0"
-                  allowFullScreen={true} 
-                  loading="lazy" 
-                  referrerPolicy="no-referrer-when-downgrade"
-                ></iframe>
-              </div>
+              <p>日頃お世話になっております<br />
+              みなさまに 私どもの門出を<br />
+              お見守りいただきたく<br />
+              ささやかながら小宴を<br />
+              催したく存じます</p>
+
+              <p>ご多用中 誠に恐縮ではございますが<br />
+              ぜひご出席いただきたく<br />
+              ご案内申し上げます</p>
             </div>
+          </div>
 
-            {/* 送迎バス情報セクション */}
-            <div className="bg-neutral-50 rounded-xl p-5 sm:p-6 space-y-3 border border-neutral-100 text-sm text-gray-700">
-              <h3 className="font-bold text-base text-gray-800 border-b border-gray-200 pb-2 font-serif">
-                Shuttle Bus Information
-              </h3>
-              <p className="text-xs text-gray-500 leading-relaxed">
-                当日は三ノ宮駅より、専用の無料送迎バスが運行しております。運行スケジュールは以下の画像をご確認ください。
-              </p>
-              <div className="w-full rounded-lg overflow-hidden border border-gray-200 bg-white">
-                <img 
-                  src="https://www.ikk-wed.jp/files/uploads/%E7%94%BB%E5%83%8F%20(10)_1.png" 
-                  alt="三ノ宮駅送迎バス時刻表・乗り場案内" 
-                  className="w-full h-auto object-contain"
-                />
-              </div>
-            </div>
-
-            {/* 入力フォーム */}
-            <form className="space-y-6 pt-4 border-t border-gray-100" onSubmit={handleSubmit}>
-              {error && (
-                <div className="bg-red-50 border-l-4 border-red-400 p-4 text-sm text-red-700 rounded-r-md">
-                  {error}
-                </div>
-              )}
-
+          {/* 3. 新郎新婦 紹介セクション（背景をなじむ暗い赤のグラデーション・枠へ） */}
+          <div className="space-y-12 bg-black/15 p-6 sm:p-8 rounded-xl border border-red-900/40">
+            <h3 className="text-center text-xl font-serif font-bold text-amber-100 tracking-wide">
+              Groom & Bride
+            </h3>
+            
+            {/* 新郎新婦を縦に並べるコンテナ */}
+            <div className="space-y-16 pt-2">
+              
+              {/* === 新郎セクション === */}
               <div className="space-y-5">
+                {/* 写真 */}
+                <div className="w-full max-w-[280px] aspect-[1/1] mx-auto rounded-xl overflow-hidden border border-red-900/60 shadow-md bg-red-900/30">
+                  <img 
+                    src="/images/ryosuke.jpg" 
+                    alt="新郎 亮佑" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
                 {/* お名前 */}
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700">
-                    お名前 <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    required
-                    value={formData.name}
-                    onChange={handleChange}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm"
-                    placeholder="山田 太郎"
+                <div className="text-center pb-1 max-w-[280px] mx-auto border-b border-red-900/60">
+                  <span className="text-[10px] tracking-widest text-stone-400 block font-serif leading-none">GROOM</span>
+                  <span className="text-lg font-bold text-white font-serif">亮佑</span>
+                </div>
+                
+                {/* 縦並びのバッジ型Q&A */}
+                <div className="space-y-4 text-left max-w-[280px] mx-auto text-xs">
+                  <div className="space-y-1">
+                    <div className="inline-block px-2.5 py-0.5 bg-amber-100/15 text-[10px] text-amber-200 font-bold rounded-md tracking-wider border border-amber-100/10">
+                      生年月日
+                    </div>
+                    <p className="text-stone-200 font-medium pl-1 text-sm">1996年 11月 12日</p>
+                  </div>
+                  
+                  <div className="space-y-1">
+                    <div className="inline-block px-2.5 py-0.5 bg-amber-100/15 text-[10px] text-amber-200 font-bold rounded-md tracking-wider border border-amber-100/10">
+                      血液型
+                    </div>
+                    <p className="text-stone-200 font-medium pl-1 text-sm">A型</p>
+                  </div>
+
+                  <div className="space-y-1">
+                    <div className="inline-block px-2.5 py-0.5 bg-amber-100/15 text-[10px] text-amber-200 font-bold rounded-md tracking-wider border border-amber-100/10">
+                      趣味
+                    </div>
+                    <p className="text-stone-200 font-medium pl-1 text-sm">楽器演奏・スポーツ観戦</p>
+                  </div>
+
+                  <div className="space-y-1">
+                    <div className="inline-block px-2.5 py-0.5 bg-amber-100/15 text-[10px] text-amber-200 font-bold rounded-md tracking-wider border border-amber-100/10">
+                      好きな食べ物
+                    </div>
+                    <p className="text-stone-200 font-medium pl-1 text-sm">うどん・ビーフシチュー</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* === 新婦セクション === */}
+              <div className="space-y-5">
+                {/* 写真 */}
+                <div className="w-full max-w-[280px] aspect-[1/1] mx-auto rounded-xl overflow-hidden border border-red-900/60 shadow-md bg-red-900/30">
+                  <img 
+                    src="/images/erika.jpg" 
+                    alt="新婦 恵利佳" 
+                    className="w-full h-full object-cover"
                   />
                 </div>
+                {/* お名前 */}
+                <div className="text-center pb-1 max-w-[280px] mx-auto border-b border-red-900/60">
+                  <span className="text-[10px] tracking-widest text-stone-400 block font-serif leading-none">BRIDE</span>
+                  <span className="text-lg font-bold text-white font-serif">恵利佳</span>
+                </div>
+                
+                {/* 縦並びのバッジ型Q&A */}
+                <div className="space-y-4 text-left max-w-[280px] mx-auto text-xs">
+                  <div className="space-y-1">
+                    <div className="inline-block px-2.5 py-0.5 bg-amber-100/15 text-[10px] text-amber-200 font-bold rounded-md tracking-wider border border-amber-100/10">
+                      生年月日
+                    </div>
+                    <p className="text-stone-200 font-medium pl-1 text-sm">2000年 3月 25日</p>
+                  </div>
+                  
+                  <div className="space-y-1">
+                    <div className="inline-block px-2.5 py-0.5 bg-amber-100/15 text-[10px] text-amber-200 font-bold rounded-md tracking-wider border border-amber-100/10">
+                      血液型
+                    </div>
+                    <p className="text-stone-200 font-medium pl-1 text-sm">A型</p>
+                  </div>
 
-                {/* フリガナ */}
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700">
-                    フリガナ <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="furigana"
-                    required
-                    value={formData.furigana}
-                    onChange={handleChange}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm"
-                    placeholder="ヤマダ タロウ"
+                  <div className="space-y-1">
+                    <div className="inline-block px-2.5 py-0.5 bg-amber-100/15 text-[10px] text-amber-200 font-bold rounded-md tracking-wider border border-amber-100/10">
+                      趣味
+                    </div>
+                    <p className="text-stone-200 font-medium pl-1 text-sm">楽器演奏・料理</p>
+                  </div>
+
+                  <div className="space-y-1">
+                    <div className="inline-block px-2.5 py-0.5 bg-amber-100/15 text-[10px] text-amber-200 font-bold rounded-md tracking-wider border border-amber-100/10">
+                      好きな食べ物
+                    </div>
+                    <p className="text-stone-200 font-medium pl-1 text-sm">ラーメン・パン</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          {submitted ? (
+            /* 送信完了後の画面 */
+            <div className="text-center py-12 space-y-4">
+              <div className="text-amber-200 text-6xl animate-bounce">✓</div>
+              <h3 className="text-xl font-semibold text-white">
+                ご回答ありがとうございました
+              </h3>
+              <p className="text-sm text-stone-300 max-w-md mx-auto leading-relaxed">
+                新郎新婦へ情報が送信されました。<br />
+                当日お会いできることを楽しみにしております。
+              </p>
+            </div>
+          ) : (
+            /* 送信前の画面 */
+            <>
+              {/* 会場・日時情報セクション */}
+              <div className="bg-black/15 rounded-xl p-5 sm:p-6 space-y-4 border border-red-900/40 text-sm text-stone-300">
+                <h3 className="font-bold text-base text-amber-100 border-b border-red-900/60 pb-2 font-serif tracking-wider">
+                  Information
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                  <span className="font-semibold text-stone-400">日時 / 集合時間</span>
+                  <span className="sm:col-span-2 text-white font-medium">
+                    2026年 8月 8日（土） <br />
+                    <span className="text-amber-200 font-bold">【受付開始】 13:00 </span> 
+                    <span className="text-red-900">/</span> 【挙式開始】 14:00
+                  </span>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-2 border-t border-dashed border-red-900/40">
+                  <span className="font-semibold text-stone-400">式場名</span>
+                  <span className="sm:col-span-2 text-white font-medium">
+                    ララシャンスKOBE（LaLa Chance KOBE）<br />
+                    <a 
+                      href="https://www.ikk-wed.jp/kobe/access" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="text-xs text-amber-200 font-semibold underline hover:text-amber-100 inline-block mt-1 tracking-wider"
+                    >
+                      公式アクセスサイトを見る ↗
+                    </a>
+                  </span>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-2 border-t border-dashed border-red-900/40">
+                  <span className="font-semibold text-stone-400">住所</span>
+                  <span className="sm:col-span-2 text-stone-300">
+                    〒650-0045 兵庫県神戸市中央区港島波止場2
+                  </span>
+                </div>
+                
+                {/* Googleマップ埋め込み */}
+                <div className="w-full overflow-hidden rounded-lg border border-red-900/60 aspect-video mt-3 opacity-90">
+                  <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3281.5634455047357!2d135.2023265!3d34.6657264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60008fa30bb1cc2f%3A0x5158554b8b78d2a!2z44Op44Op44K344Oj44Oz44K5S09CRe-8iOelnuaIuOW4giDntZDlqZrlvI_loLTvvIk!5e0!3m2!1sja!2sjp!4v1779037088985!5m2!1sja!2sjp" 
+                    className="w-full h-full border-0"
+                    allowFullScreen={true} 
+                    loading="lazy" 
+                    referrerPolicy="no-referrer-when-downgrade"
+                  ></iframe>
+                </div>
+              </div>
+
+              {/* 送迎バス情報セクション */}
+              <div className="bg-black/15 rounded-xl p-5 sm:p-6 space-y-3 border border-red-900/40 text-sm text-stone-300">
+                <h3 className="font-bold text-base text-amber-100 border-b border-red-900/60 pb-2 font-serif tracking-wider">
+                  Shuttle Bus Information
+                </h3>
+                <p className="text-xs text-stone-400 leading-relaxed">
+                  当日は三ノ宮駅より、専用の無料送迎バスが運行しております。運行スケジュールは以下の画像をご確認ください。
+                </p>
+                <div className="w-full rounded-lg overflow-hidden border border-red-900/60 bg-white/5 p-1">
+                  <img 
+                    src="/images/map.webp" 
+                    alt="三ノ宮駅送迎バス時刻表・乗り場案内" 
+                    className="w-full h-auto object-contain rounded"
                   />
                 </div>
+              </div>
 
-                {/* メールアドレス */}
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700">
-                    メールアドレス
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm"
-                    placeholder="example@email.com"
-                  />
-                </div>
+              {/* 入力フォーム */}
+              <form className="space-y-6 pt-4 border-t border-red-900/60" onSubmit={handleSubmit}>
+                {error && (
+                  <div className="bg-red-900/50 border-l-4 border-amber-200 p-4 text-sm text-stone-100 rounded-r-md">
+                    {error}
+                  </div>
+                )}
 
-                {/* 新郎/新婦の招待選択 */}
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700">
-                    どちらからのご招待ですか？ <span className="text-red-500">*</span>
-                  </label>
-                  <div className="mt-2 flex items-center space-x-6 text-sm">
-                    <label className="inline-flex items-center cursor-pointer">
-                      <input
-                        type="radio"
-                        name="side"
-                        value="groom"
-                        checked={formData.side === "groom"}
-                        onChange={handleChange}
-                        className="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
-                      />
-                      <span className="ml-2 text-gray-700">新郎側</span>
+                <div className="space-y-5">
+                  {/* お名前 */}
+                  <div>
+                    <label className="block text-sm font-semibold text-stone-200">
+                      お名前 <span className="text-amber-300">*</span>
                     </label>
-                    <label className="inline-flex items-center cursor-pointer">
-                      <input
-                        type="radio"
-                        name="side"
-                        value="bride"
-                        checked={formData.side === "bride"}
-                        onChange={handleChange}
-                        className="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
-                      />
-                      <span className="ml-2 text-gray-700">新婦側</span>
+                    <input
+                      type="text"
+                      name="name"
+                      required
+                      value={formData.name}
+                      onChange={handleChange}
+                      className="mt-1 block w-full px-3 py-2 bg-red-950/60 border border-red-900/80 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-amber-200 focus:border-amber-200 text-sm text-white placeholder-stone-500"
+                      placeholder="山田 太郎"
+                    />
+                  </div>
+
+                  {/* フリガナ */}
+                  <div>
+                    <label className="block text-sm font-semibold text-stone-200">
+                      フリガナ <span className="text-amber-300">*</span>
                     </label>
+                    <input
+                      type="text"
+                      name="furigana"
+                      required
+                      value={formData.furigana}
+                      onChange={handleChange}
+                      className="mt-1 block w-full px-3 py-2 bg-red-950/60 border border-red-900/80 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-amber-200 focus:border-amber-200 text-sm text-white placeholder-stone-500"
+                      placeholder="ヤマダ タロウ"
+                    />
+                  </div>
+
+                  {/* メールアドレス */}
+                  <div>
+                    <label className="block text-sm font-semibold text-stone-200">
+                      メールアドレス
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      className="mt-1 block w-full px-3 py-2 bg-red-950/60 border border-red-900/80 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-amber-200 focus:border-amber-200 text-sm text-white placeholder-stone-500"
+                      placeholder="example@email.com"
+                    />
+                  </div>
+
+                  {/* 新郎/新婦の招待選択 */}
+                  <div>
+                    <label className="block text-sm font-semibold text-stone-200">
+                      どちらからのご招待ですか？ <span className="text-amber-300">*</span>
+                    </label>
+                    <div className="mt-2 flex items-center space-x-6 text-sm">
+                      <label className="inline-flex items-center cursor-pointer">
+                        <input
+                          type="radio"
+                          name="side"
+                          value="groom"
+                          checked={formData.side === "groom"}
+                          onChange={handleChange}
+                          className="h-4 w-4 text-amber-200 border-red-900 focus:ring-0 accent-amber-200"
+                        />
+                        <span className="ml-2 text-stone-300">新郎側</span>
+                      </label>
+                      <label className="inline-flex items-center cursor-pointer">
+                        <input
+                          type="radio"
+                          name="side"
+                          value="bride"
+                          checked={formData.side === "bride"}
+                          onChange={handleChange}
+                          className="h-4 w-4 text-amber-200 border-red-900 focus:ring-0 accent-amber-200"
+                        />
+                        <span className="ml-2 text-stone-300">新婦側</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* 参加可否 */}
+                  <div>
+                    <label className="block text-sm font-semibold text-stone-200">
+                      結婚式の出欠 <span className="text-amber-300">*</span>
+                    </label>
+                    <div className="mt-2 flex items-center space-x-6 text-sm">
+                      <label className="inline-flex items-center cursor-pointer">
+                        <input
+                          type="radio"
+                          name="attendance"
+                          value="yes"
+                          checked={formData.attendance === "yes"}
+                          onChange={handleChange}
+                          className="h-4 w-4 text-amber-200 border-red-900 focus:ring-0 accent-amber-200"
+                        />
+                        <span className="ml-2 text-white font-semibold">ご出席</span>
+                      </label>
+                      <label className="inline-flex items-center cursor-pointer">
+                        <input
+                          type="radio"
+                          name="attendance"
+                          value="no"
+                          checked={formData.attendance === "no"}
+                          onChange={handleChange}
+                          className="h-4 w-4 text-amber-200 border-red-900 focus:ring-0 accent-amber-200"
+                        />
+                        <span className="ml-2 text-stone-300">ご欠席</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* 送迎バス */}
+                  <div>
+                    <label className="block text-sm font-semibold text-stone-200">
+                      送迎バスの利用
+                    </label>
+                    <select
+                      name="bus"
+                      value={formData.bus}
+                      onChange={handleChange}
+                      className="mt-1 block w-full py-2 px-3 border border-red-900/80 bg-red-950/80 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-amber-200 focus:border-amber-200 text-sm text-white"
+                    >
+                      <option value="no" className="bg-red-950 text-white">不要（自家用車・公共交通機関など）</option>
+                      <option value="yes" className="bg-red-950 text-white">必要（三ノ宮駅からのシャトルバスを利用）</option>
+                    </select>
+                  </div>
+
+                  {/* アレルギー */}
+                  <div>
+                    <label className="block text-sm font-semibold text-stone-200">
+                      アレルギー・苦手な食べ物について
+                    </label>
+                    <div className="mt-1 bg-black/20 rounded p-3 text-xs text-stone-300 space-y-1 border border-red-900/40">
+                      <p className="font-semibold text-amber-200">【ご記入の凡例】</p>
+                      <ul className="list-disc pl-4 space-y-0.5 text-stone-400">
+                        <li>アレルギー： エビ・カニ（出汁もNG）、小麦アレルギー 等</li>
+                        <li>苦手な食べ物： 生魚が苦手（火が通っていればOK）、加熱した椎茸 等</li>
+                      </ul>
+                      <p className="text-[11px] text-stone-500 pt-1">※重度のアレルギー等、調理器具の洗浄レベルから配慮が必要な場合はその旨もご記載ください。</p>
+                    </div>
+                    <textarea
+                      name="allergy"
+                      value={formData.allergy}
+                      onChange={handleChange}
+                      rows={2}
+                      className="mt-2 block w-full shadow-sm text-sm bg-red-950/60 border border-red-900/80 rounded-md focus:outline-none focus:ring-1 focus:ring-amber-200 focus:border-amber-200 text-white placeholder-stone-500"
+                      placeholder="特にありません / 凡例を参考に具体的にご記入ください"
+                    />
+                  </div>
+
+                  {/* 特記事項 */}
+                  <div>
+                    <label className="block text-sm font-semibold text-stone-200">
+                      特記事項・ご要望
+                    </label>
+                    <p className="text-xs text-stone-400 mb-1">
+                      車椅子でのご来場、妊娠中、授乳中、お子様連れでのご参加など、配慮が必要な点がございましたらご自由記入ください。
+                    </p>
+                    <textarea
+                      name="specialNotes"
+                      value={formData.specialNotes}
+                      onChange={handleChange}
+                      rows={2}
+                      className="mt-1 block w-full shadow-sm text-sm bg-red-950/60 border border-red-900/80 rounded-md focus:outline-none focus:ring-1 focus:ring-amber-200 focus:border-amber-200 text-white placeholder-stone-500"
+                      placeholder="例：車椅子を利用しているため、スロープの配置を希望します。 / 授乳室の利用を希望します。"
+                    />
+                  </div>
+
+                  {/* メッセージ */}
+                  <div>
+                    <label className="block text-sm font-semibold text-stone-200">
+                      新郎新婦へのメッセージ
+                    </label>
+                    <textarea
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      rows={3}
+                      className="mt-1 block w-full shadow-sm text-sm bg-red-950/60 border border-red-900/80 rounded-md focus:outline-none focus:ring-1 focus:ring-amber-200 focus:border-amber-200 text-white placeholder-stone-500"
+                      placeholder="おめでとうございます！当日を楽しみにしています。"
+                    />
                   </div>
                 </div>
 
-                {/* 参加可否 */}
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700">
-                    結婚式の出欠 <span className="text-red-500">*</span>
-                  </label>
-                  <div className="mt-2 flex items-center space-x-6 text-sm">
-                    <label className="inline-flex items-center cursor-pointer">
-                      <input
-                        type="radio"
-                        name="attendance"
-                        value="yes"
-                        checked={formData.attendance === "yes"}
-                        onChange={handleChange}
-                        className="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
-                      />
-                      <span className="ml-2 text-gray-700 font-medium">ご出席</span>
-                    </label>
-                    <label className="inline-flex items-center cursor-pointer">
-                      <input
-                        type="radio"
-                        name="attendance"
-                        value="no"
-                        checked={formData.attendance === "no"}
-                        onChange={handleChange}
-                        className="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
-                      />
-                      <span className="ml-2 text-gray-700">ご欠席</span>
-                    </label>
-                  </div>
-                </div>
-
-                {/* 送迎バス */}
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700">
-                    送迎バスの利用
-                  </label>
-                  <select
-                    name="bus"
-                    value={formData.bus}
-                    onChange={handleChange}
-                    className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm"
+                  <button
+                    type="submit"
+                    className="w-full flex justify-center py-2.5 px-4 border border-transparent text-sm font-medium rounded-md text-red-950 bg-amber-100 hover:bg-amber-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-200 shadow-md transition-colors tracking-widest font-bold"
                   >
-                    <option value="no">不要（自家用車・公共交通機関など）</option>
-                    <option value="yes">必要（三ノ宮駅からのシャトルバスを利用）</option>
-                  </select>
+                    入力内容を送信する
+                  </button>
                 </div>
-
-                {/* アレルギー (凡例の追加) */}
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700">
-                    アレルギー・苦手な食べ物について
-                  </label>
-                  <div className="mt-1 bg-amber-50 rounded p-3 text-xs text-amber-800 space-y-1 border border-amber-100">
-                    <p className="font-semibold">【ご記入の凡例】</p>
-                    <ul className="list-disc pl-4 space-y-0.5">
-                      <li>アレルギー： エビ・カニ（出汁もNG）、小麦アレルギー 等</li>
-                      <li>苦手な食べ物： 生魚が苦手（火が通っていればOK）、加熱した椎茸 等</li>
-                    </ul>
-                    <p className="text-[11px] text-amber-700 pt-1">※重度のアレルギー等、調理器具の洗浄レベルから配慮が必要な場合はその旨もご記載ください。</p>
-                  </div>
-                  <textarea
-                    name="allergy"
-                    value={formData.allergy}
-                    onChange={handleChange}
-                    rows={2}
-                    className="mt-2 block w-full shadow-sm text-sm border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
-                    placeholder="特にありません / 凡例を参考に具体的にご記入ください"
-                  />
-                </div>
-
-                {/* 特記事項 */}
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700">
-                    特記事項・ご要望
-                  </label>
-                  <p className="text-xs text-gray-400 mb-1">
-                    车椅子でのご来場、妊娠中、授乳中、お子様連れでのご参加など、配慮が必要な点がございましたらご自由にご記入ください。
-                  </p>
-                  <textarea
-                    name="specialNotes"
-                    value={formData.specialNotes}
-                    onChange={handleChange}
-                    rows={2}
-                    className="mt-1 block w-full shadow-sm text-sm border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
-                    placeholder="例：車椅子を利用しているため、スロープの配置を希望します。 / 授乳室の利用を希望します。"
-                  />
-                </div>
-
-                {/* メッセージ */}
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700">
-                    新郎新婦へのメッセージ
-                  </label>
-                  <textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    rows={3}
-                    className="mt-1 block w-full shadow-sm text-sm border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
-                    placeholder="おめでとうございます！当日を楽しみにしています。"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <button
-                  type="submit"
-                  className="w-full flex justify-center py-2.5 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 shadow-sm transition-colors"
-                >
-                  入力内容を送信する
-                </button>
-              </div>
-            </form>
-          </>
-        )}
+              </form>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

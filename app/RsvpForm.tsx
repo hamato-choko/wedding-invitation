@@ -2,9 +2,13 @@
 "use client";
 
 import { useState } from "react";
+import { Amplify } from "aws-amplify";
 // AmplifyのAPIクライアントをインポート
 import { generateClient } from "aws-amplify/data";
 import type { Schema } from "@/amplify/data/resource";
+import outputs from "@/amplify_outputs.json";
+
+Amplify.configure(outputs);
 
 // クライアントの初期化
 const client = generateClient<Schema>();
@@ -32,7 +36,12 @@ export default function RsvpForm() {
     >
   ) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    
+    // 状態(formData)を更新するときは、直前の最新状態(prev)を確実に引き継ぐようにします
+    setFormData((prev) => ({ 
+      ...prev, 
+      [name]: value 
+    }));
   };
 
   // 送信処理をDynamoDB連携に書き換え
@@ -221,10 +230,18 @@ export default function RsvpForm() {
 
               {/* 送迎バス情報セクション */}
               <div className="bg-black/15 rounded-xl p-5 sm:p-6 space-y-3 border border-red-900/40 text-sm text-stone-300">
-                <h3 className="font-bold text-base text-amber-100 border-b border-red-900/60 pb-2 font-serif tracking-wider">Shuttle Bus Information</h3>
-                <p className="text-xs text-stone-400">当日は三ノ宮駅より、専用の無料送迎バスが運行しております。</p>
+                <h3 className="font-bold text-base text-amber-100 border-b border-red-900/60 pb-2 font-serif tracking-wider">
+                  Shuttle Bus Information
+                </h3>
+                <p className="text-xs text-stone-400 leading-relaxed">
+                  当日は三ノ宮駅より、専用の無料送迎バスが運行しております。運行スケジュールは以下の画像をご確認ください。
+                </p>
                 <div className="w-full rounded-lg overflow-hidden border border-red-900/60 bg-white/5 p-1">
-                  <img src="/images/map.webp" alt="三ノ宮駅送迎バス時刻表" className="w-full h-auto object-contain rounded" />
+                  <img 
+                    src="/images/map.webp" 
+                    alt="三ノ宮駅送迎バス時刻表・乗り場案内" 
+                    className="w-full h-auto object-contain rounded"
+                  />
                 </div>
               </div>
 
@@ -280,11 +297,22 @@ export default function RsvpForm() {
                   </div>
                   <div>
                     <label className="block text-sm font-semibold text-stone-200">アレルギー・苦手な食べ物について</label>
-                    <textarea name="allergy" value={formData.allergy} onChange={handleChange} rows={2} className="mt-2 block w-full text-sm bg-red-950/60 border border-red-900/80 rounded-md text-white focus:outline-none focus:ring-1 focus:ring-amber-200" placeholder="特にありません" />
+                    <div className="mt-1 bg-black/20 rounded p-3 text-xs text-stone-300 space-y-1 border border-red-900/40">
+                      <p className="font-semibold text-amber-200">【ご記入の凡例】</p>
+                      <ul className="list-disc pl-4 space-y-0.5 text-stone-400">
+                        <li>アレルギー： エビ・カニ（出汁もNG）、小麦アレルギー 等</li>
+                        <li>苦手な食べ物： 生魚が苦手（火が通っていればOK）、加熱した椎茸 等</li>
+                      </ul>
+                      <p className="text-[11px] text-stone-500 pt-1">※重度のアレルギー等、調理器具の洗浄レベルから配慮が必要な場合はその旨もご記載ください。</p>
+                    </div>
+                    <textarea name="allergy" value={formData.allergy} onChange={handleChange} rows={2} className="mt-2 block w-full text-sm bg-red-950/60 border border-red-900/80 rounded-md text-white focus:outline-none focus:ring-1 focus:ring-amber-200" placeholder="特にありません / 凡例を参考に具体的にご記入ください" />
                   </div>
                   <div>
                     <label className="block text-sm font-semibold text-stone-200">特記事項・ご要望</label>
-                    <textarea name="specialNotes" value={formData.specialNotes} onChange={handleChange} rows={2} className="mt-1 block w-full text-sm bg-red-950/60 border border-red-900/80 rounded-md text-white focus:outline-none focus:ring-1 focus:ring-amber-200" placeholder="例：車椅子を利用しているため、スロープの配置を希望します。" />
+                    <p className="text-xs text-stone-400 mb-1">
+                      車椅子でのご来場、妊娠中、授乳中、お子様連れでのご参加など、配慮が必要な点がございましたらご自由記入ください。
+                    </p>
+                    <textarea name="specialNotes" value={formData.specialNotes} onChange={handleChange} rows={2} className="mt-1 block w-full text-sm bg-red-950/60 border border-red-900/80 rounded-md text-white focus:outline-none focus:ring-1 focus:ring-amber-200" placeholder="例：車椅子を利用しているため、スロープの配置を希望します。 / 授乳室の利用を希望します。" />
                   </div>
                   <div>
                     <label className="block text-sm font-semibold text-stone-200">新郎新婦へのメッセージ</label>

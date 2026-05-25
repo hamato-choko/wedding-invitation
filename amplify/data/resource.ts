@@ -8,7 +8,7 @@ const schema = a.schema({
       name: a.string().required(),         // お名前（必須）
       furigana: a.string().required(),     // フリガナ（必須）
       email: a.string(),                   // メールアドレス
-      address: a.string().required().      // 住所(必須)
+      address: a.string().required(),      // 住所(必須)
       side: a.string().required(),         // 新郎側(groom) / 新婦側(bride)（必須）
       attendance: a.string().required(),   // ご出席(yes) / ご欠席(no)（必須）
       bus: a.string().required(),          // 送迎バス 必要(yes) / 不要(no)（必須）

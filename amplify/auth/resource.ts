@@ -20,10 +20,10 @@ export const auth = defineAuth({
   },
   // 🔒 パスワードのセキュリティルールを極限まで緩める設定
   passwordPolicy: {
-    minLength: 8,                  // 💡 7文字以上
-    requireLowercase: false,       // 小文字は必須にしない
-    requireUppercase: false,       // 大文字は必須にしない
-    requireDigits: false,          // 数字は必須にしない
-    requireSymbols: false,         // 記号は必須にしない
+    minLength: 8,
+    requireNumbers: true,
+    requireSpecialCharacters: true,
+    requireUppercase: true,
+    requireLowercase: true,
   },
 });

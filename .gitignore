@@ -14,7 +14,9 @@
 /coverage
 
 # next.js
+/.next/*/
 /.next/
+\.next\dev\
 /out/
 
 # production
@@ -46,3 +48,6 @@ node_modules
 .amplify
 amplify_outputs*
 amplifyconfiguration*
+.next/dev/trace
+.next/dev/cache/turbopack/2275bd85/CURRENT
+.next/dev/cache/turbopack/2275bd85/LOG

@@ -15,8 +15,8 @@ const schema = a.schema({
       specialNotes: a.string(),            // 特記事項・ご要望
       message: a.string(),                 // 新郎新婦へのメッセージ
     })
-    // ログインしていないゲストでもフォームの送信（作成）だけできるように許可
-    .authorization((allow) => [allow.publicApiKey().to(["create"])]),
+    // 💡 .to(["create"]) を削除し、読み込み(read)・更新(update)・削除(delete)もすべて許可します
+    .authorization((allow) => [allow.publicApiKey()]),
 });
 
 export type Schema = ClientSchema<typeof schema>;
@@ -27,7 +27,7 @@ export const data = defineData({
   authorizationModes: {
     defaultAuthorizationMode: 'apiKey',
     apiKeyAuthorizationMode: {
-      expiresInDays: 30, // 30日間有効なAPIキー（本番時は延ばせます）
+      expiresInDays: 180, // 💡 式の準備期間を考慮して、APIキーの有効期限を180日に延ばしておきました
     },
   },
 });

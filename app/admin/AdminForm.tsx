@@ -32,22 +32,32 @@ export default function AdminForm() {
     // コンポーネント起動時にAmplifyを初期化
     Amplify.configure(outputs);
 
-    // 💡 リアルタイムのエラーを避けるため、一括取得(list)を使用します
     const fetchRsvps = async () => {
       try {
         setLoading(true);
-        const { data: items } = await client.models.Rsvp.list();
-        const sorted = [...items].sort((a, b) => a.furigana.localeCompare(b.furigana, "ja"));
-        setRsvps(sorted);
+        const response = await client.models.Rsvp.list();
+        
+        // 💡 念のため、データが本当に取れているかブラウザの「F12」ログに出力
+        console.log("経由：AWSから取得した生データ:", response.data);
+
+        if (response.data) {
+          // フリガナ順に正しくソート
+          const sorted = [...response.data].sort((a, b) => 
+            (a.furigana || "").localeCompare(b.furigana || "", "ja")
+          );
+          
+          // 💡 ここでステートを更新！これでNext.jsが「データが入ったぞ！」と気づいて画面を再描画します
+          setRsvps(sorted);
+        }
       } catch (err) {
-        console.error("🔥データ取得エラー:", err);
+        console.error("🔥データ取得エラーの詳細:", err);
       } finally {
         setLoading(false);
       }
     };
 
     fetchRsvps();
-  }, []);
+  }, []); // 最初の1回だけ実行
 
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();

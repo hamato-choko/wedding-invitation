@@ -80,16 +80,18 @@ export default function RsvpForm() {
   };
 
   return (
-    <div className="min-h-screen bg-stone-100 flex items-center justify-center py-8 px-4 sm:px-6 lg:px-8">
-      {/* 招待状カードの背景を「暗い赤 (bg-red-950)」に設定 */}
-      <div className="max-w-2xl w-full space-y-8 bg-red-950 rounded-2xl shadow-2xl border border-red-900/50 overflow-hidden text-stone-100">
+    // 💡 修正ポイント①：スマホ時(デフォルト)の py-0 px-0 に変更し、パソコン時(sm:)だけ余白を付ける
+    <div className="min-h-screen bg-stone-100 flex items-center justify-center py-0 sm:py-8 px-0 sm:px-6 lg:px-8">
+      {/* 💡 修正ポイント②：スマホ時は角丸をなし(rounded-none)にして画面いっぱいに、パソコン時(sm:)だけ rounded-2xl に */}
+      <div className="max-w-2xl w-full space-y-8 bg-red-950 rounded-none sm:rounded-2xl shadow-2xl border-0 sm:border border-red-900/50 overflow-hidden text-stone-100">
         
         {/* 1. メインビジュアル画像 */}
-        <div className="w-full aspect-[4/3] sm:aspect-[16/9] overflow-hidden bg-red-950/50">
+        {/* 💡 修正ポイント③：h-autoにして画像本来の比率を完全に維持。見切れを絶対になくす */}
+        <div className="w-full h-auto overflow-hidden bg-red-950/50">
           <img 
             src="/images/wedding_invitation.jpg" 
             alt="Wedding Invitation Main Visual" 
-            className="w-full h-full object-cover"
+            className="w-full h-auto block"
           />
         </div>
 
@@ -303,7 +305,7 @@ export default function RsvpForm() {
                         <li>アレルギー： エビ・カニ（出汁もNG）、小麦アレルギー 等</li>
                         <li>苦手な食べ物： 生魚が苦手（火が通っていればOK）、加熱した椎茸 等</li>
                       </ul>
-                      <p className="text-[11px] text-stone-500 pt-1">※重度のアレルギー等、調理器具の洗浄レベルから配慮が必要な場合はその旨もご記載ください。</p>
+                      <p className="text-[11px] text-stone-500 pt-1">※重度のアレルギー等, 調理器具の洗浄レベルから配慮が必要な場合はその旨もご記載ください。</p>
                     </div>
                     <textarea name="allergy" value={formData.allergy} onChange={handleChange} rows={2} className="mt-2 block w-full text-sm bg-red-950/60 border border-red-900/80 rounded-md text-white focus:outline-none focus:ring-1 focus:ring-amber-200" placeholder="特にありません / 凡例を参考に具体的にご記入ください" />
                   </div>

@@ -80,13 +80,10 @@ export default function RsvpForm() {
   };
 
   return (
-    // 💡 修正ポイント①：スマホ時(デフォルト)の py-0 px-0 に変更し、パソコン時(sm:)だけ余白を付ける
     <div className="min-h-screen bg-stone-100 flex items-center justify-center py-0 sm:py-8 px-0 sm:px-6 lg:px-8">
-      {/* 💡 修正ポイント②：スマホ時は角丸をなし(rounded-none)にして画面いっぱいに、パソコン時(sm:)だけ rounded-2xl に */}
       <div className="max-w-2xl w-full space-y-8 bg-red-950 rounded-none sm:rounded-2xl shadow-2xl border-0 sm:border border-red-900/50 overflow-hidden text-stone-100">
         
         {/* 1. メインビジュアル画像 */}
-        {/* 💡 修正ポイント③：h-autoにして画像本来の比率を完全に維持。見切れを絶対になくす */}
         <div className="w-full h-auto overflow-hidden bg-red-950/50">
           <img 
             src="/images/wedding_invitation.jpg" 
@@ -104,6 +101,17 @@ export default function RsvpForm() {
             <p className="text-xs font-medium text-stone-300 tracking-widest">
               ご出欠のお伺い
             </p>
+          </div>
+
+          {/* 💡 注目ポイント：ここに新郎新婦の2人写真をベスト配置！ */}
+          <div className="w-full px-2 sm:px-4">
+            <div className="w-full h-auto overflow-hidden rounded-xl border border-red-900/40 shadow-xl bg-red-900/20 p-1.5 sm:p-2">
+              <img 
+                src="/images/futari.jpg" 
+                alt="新郎新婦 お写真" 
+                className="w-full h-auto block rounded-lg"
+              />
+            </div>
           </div>
 
           {/* 2. Message セクション */}

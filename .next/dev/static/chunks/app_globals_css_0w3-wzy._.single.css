@@ -32,7 +32,6 @@
       --tw-backdrop-opacity: initial;
       --tw-backdrop-saturate: initial;
       --tw-backdrop-sepia: initial;
-      --tw-duration: initial;
     }
   }
 }
@@ -527,6 +526,14 @@
     max-width: var(--container-6xl);
   }
 
+  .max-w-\[50px\] {
+    max-width: 50px;
+  }
+
+  .max-w-\[150px\] {
+    max-width: 150px;
+  }
+
   .max-w-\[280px\] {
     max-width: 280px;
   }
@@ -931,6 +938,10 @@
 
   .bg-gray-50 {
     background-color: var(--color-gray-50);
+  }
+
+  .bg-gray-100 {
+    background-color: var(--color-gray-100);
   }
 
   .bg-red-900\/20 {
@@ -1439,14 +1450,14 @@
     transition-duration: var(--tw-duration, var(--default-transition-duration));
   }
 
-  .duration-150 {
-    --tw-duration: .15s;
-    transition-duration: .15s;
-  }
-
   .outline-none {
     --tw-outline-style: none;
     outline-style: none;
+  }
+
+  .select-all {
+    -webkit-user-select: all;
+    user-select: all;
   }
 
   @media (hover: hover) {
@@ -1482,6 +1493,12 @@
   @media (hover: hover) {
     .hover\:bg-gray-100:hover {
       background-color: var(--color-gray-100);
+    }
+  }
+
+  @media (hover: hover) {
+    .hover\:bg-gray-200:hover {
+      background-color: var(--color-gray-200);
     }
   }
 
@@ -1543,8 +1560,38 @@
   }
 
   @media (min-width: 40rem) {
-    .sm\:w-64 {
-      width: calc(var(--spacing) * 64);
+    .sm\:w-48 {
+      width: calc(var(--spacing) * 48);
+    }
+  }
+
+  @media (min-width: 40rem) {
+    .sm\:w-49 {
+      width: calc(var(--spacing) * 49);
+    }
+  }
+
+  @media (min-width: 40rem) {
+    .sm\:w-50 {
+      width: calc(var(--spacing) * 50);
+    }
+  }
+
+  @media (min-width: 40rem) {
+    .sm\:w-52 {
+      width: calc(var(--spacing) * 52);
+    }
+  }
+
+  @media (min-width: 40rem) {
+    .sm\:w-54 {
+      width: calc(var(--spacing) * 54);
+    }
+  }
+
+  @media (min-width: 40rem) {
+    .sm\:w-60 {
+      width: calc(var(--spacing) * 60);
     }
   }
 
@@ -1818,11 +1865,6 @@ body {
 }
 
 @property --tw-backdrop-sepia {
-  syntax: "*";
-  inherits: false
-}
-
-@property --tw-duration {
   syntax: "*";
   inherits: false
 }

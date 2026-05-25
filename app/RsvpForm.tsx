@@ -18,6 +18,7 @@ export default function RsvpForm() {
     name: "",
     furigana: "",
     email: "",
+    address: "",
     side: "groom",
     attendance: "yes",
     bus: "no",
@@ -56,6 +57,7 @@ export default function RsvpForm() {
         name: formData.name,
         furigana: formData.furigana,
         email: formData.email || undefined,
+        address: formData.address,
         side: formData.side,
         attendance: formData.attendance,
         bus: formData.bus,
@@ -268,6 +270,18 @@ export default function RsvpForm() {
                   <div>
                     <label className="block text-sm font-semibold text-stone-200">メールアドレス</label>
                     <input type="email" name="email" value={formData.email} onChange={handleChange} className="mt-1 block w-full px-3 py-2 bg-red-950/60 border border-red-900/80 rounded-md text-sm text-white focus:outline-none focus:ring-1 focus:ring-amber-200 focus:border-amber-200" placeholder="example@email.com" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-semibold text-stone-200">ご住所 <span className="text-amber-300">*</span></label>
+                    <input 
+                      type="text" 
+                      name="address" 
+                      required 
+                      value={formData.address} 
+                      onChange={handleChange} 
+                      className="mt-1 block w-full px-3 py-2 bg-red-950/60 border border-red-900/80 rounded-md text-sm text-white focus:outline-none focus:ring-1 focus:ring-amber-200 focus:border-amber-200" 
+                      placeholder="兵庫県神戸市..." 
+                    />
                   </div>
                   <div>
                     <label className="block text-sm font-semibold text-stone-200">どちらからのご招待ですか？ <span className="text-amber-300">*</span></label>

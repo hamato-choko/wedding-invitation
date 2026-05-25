@@ -179,7 +179,7 @@ export default function RsvpForm() {
                   </div>
                   <div className="space-y-1">
                     <div className="inline-block px-2.5 py-0.5 bg-amber-100/15 text-[10px] text-amber-200 font-bold rounded-md tracking-wider border border-amber-100/10">血液型</div>
-                    <p className="text-stone-200 font-medium pl-1 text-sm">A型</p>
+                    <p className="text-stone-200 font-medium pl-1 text-sm">B型</p>
                   </div>
                   <div className="space-y-1">
                     <div className="inline-block px-2.5 py-0.5 bg-amber-100/15 text-[10px] text-amber-200 font-bold rounded-md tracking-wider border border-amber-100/10">趣味</div>

@@ -28,7 +28,7 @@ export default function RsvpForm() {
 
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false); // 送信中のローディング状態
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -83,7 +83,7 @@ export default function RsvpForm() {
     <div className="min-h-screen bg-stone-100 flex items-center justify-center py-0 sm:py-8 px-0 sm:px-6 lg:px-8">
       <div className="max-w-2xl w-full space-y-8 bg-red-950 rounded-none sm:rounded-2xl shadow-2xl border-0 sm:border border-red-900/50 overflow-hidden text-stone-100">
         
-        {/* 1. メインビジュアル画像 */}
+        {/* メインビジュアル画像（これは送信前後どちらでも世界観を保つために残しています） */}
         <div className="w-full h-auto overflow-hidden bg-red-950/50">
           <img 
             src="/images/wedding_invitation.jpg" 
@@ -94,25 +94,41 @@ export default function RsvpForm() {
 
         <div className="p-6 sm:p-10 space-y-10">
 
-          {/* 💡 注目ポイント：ここに新郎新婦の2人写真をベスト配置！ */}
-          <div className="w-full px-2 sm:px-4">
-            <div className="w-full h-auto overflow-hidden rounded-xl border border-red-900/40 shadow-xl bg-red-900/20 p-1.5 sm:p-2">
-              <img 
-                src="/images/futari.jpg" 
-                alt="新郎新婦 お写真" 
-                className="w-full h-auto block rounded-lg"
-              />
+          {/* 💡 送信完了画面の切り替え処理 */}
+          {submitted ? (
+            // 【送信完了後に表示されるシンプルな画面】
+            <div className="text-center py-16 space-y-6">
+              <div className="text-amber-200 text-6xl animate-bounce">✓</div>
+              <h3 className="text-xl font-serif font-bold text-amber-100 tracking-wide">
+                ご回答ありがとうございました。
+              </h3>
+              <div className="text-sm sm:text-base text-stone-300 max-w-md mx-auto leading-relaxed space-y-2 font-serif">
+                <p>ご出欠の回答を無事に受け付けました。</p>
+                <p>お忙しい中ご回答いただき<br />誠にありがとうございました。</p>
+              </div>
             </div>
-          </div>
+          ) : (
+            // 【送信前に表示される通常の画面（タイトル・写真・挨拶・自己紹介・フォーム）】
+            <>
 
-          {/* 2. Message セクション */}
-          <div className="text-center space-y-4 py-6 border-y border-red-900/60">
-            <h3 className="text-2xl font-serif italic text-amber-200 tracking-wider">
-              Message
-            </h3>
-            <div className="text-sm sm:text-base text-stone-200 leading-loose tracking-widest space-y-6 font-serif">
-              <p>皆様いかがお過ごしでしょうか</p>
-              <p>このたび 結婚式を<br />執り行うこととなりました</p>
+              <div className="w-full px-2 sm:px-4">
+                <div className="w-full h-auto overflow-hidden rounded-xl border border-red-900/40 shadow-xl bg-red-900/20 p-1.5 sm:p-2">
+                  <img 
+                    src="/images/futari.jpg" 
+                    alt="新郎新婦 お写真" 
+                    className="w-full h-auto block rounded-lg"
+                  />
+                </div>
+              </div>
+
+              {/* Message セクション */}
+              <div className="text-center space-y-4 py-6 border-y border-red-900/60">
+                <h3 className="text-2xl font-serif italic text-amber-200 tracking-wider">
+                  Message
+                </h3>
+                <div className="text-sm sm:text-base text-stone-200 leading-loose tracking-widest space-y-6 font-serif">
+                  <p>皆様いかがお過ごしでしょうか</p>
+                  <p>このたび 結婚式を<br />執り行うこととなりました</p>
               
               <p>日頃お世話になっております<br />
               みなさまに 私どもの門出を<br />
@@ -123,86 +139,76 @@ export default function RsvpForm() {
               <p>ご多用中 誠に恐縮ではございますが<br />
               ぜひご出席いただきたく<br />
               ご案内申し上げます</p>
-            </div>
-          </div>
+                </div>
+              </div>
 
-          {/* 3. 新郎新婦 紹介セクション */}
-          <div className="space-y-12 bg-black/15 p-6 sm:p-8 rounded-xl border border-red-900/40">
-            <h3 className="text-center text-xl font-serif font-bold text-amber-100 tracking-wide">
-              Groom & Bride
-            </h3>
-            
-            <div className="space-y-16 pt-2">
-              {/* === 新郎セクション === */}
-              <div className="space-y-5">
-                <div className="w-full max-w-[280px] aspect-[1/1] mx-auto rounded-xl overflow-hidden border border-red-900/60 shadow-md bg-red-900/30">
-                  <img src="/images/ryosuke.jpg" alt="新郎 亮佑" className="w-full h-full object-cover" />
-                </div>
-                <div className="text-center pb-1 max-w-[280px] mx-auto border-b border-red-900/60">
-                  <span className="text-[10px] tracking-widest text-stone-400 block font-serif leading-none">GROOM</span>
-                  <span className="text-lg font-bold text-white font-serif">亮佑</span>
-                </div>
-                <div className="space-y-4 text-left max-w-[280px] mx-auto text-xs">
-                  <div className="space-y-1">
-                    <div className="inline-block px-2.5 py-0.5 bg-amber-100/15 text-[10px] text-amber-200 font-bold rounded-md tracking-wider border border-amber-100/10">生年月日</div>
-                    <p className="text-stone-200 font-medium pl-1 text-sm">1996年 11月 12日</p>
+              {/* 新郎新婦 紹介セクション */}
+              <div className="space-y-12 bg-black/15 p-6 sm:p-8 rounded-xl border border-red-900/40">
+                <h3 className="text-center text-xl font-serif font-bold text-amber-100 tracking-wide">
+                  Groom & Bride
+                </h3>
+                
+                <div className="space-y-16 pt-2">
+                  {/* 新郎 */}
+                  <div className="space-y-5">
+                    <div className="w-full max-w-[280px] aspect-[1/1] mx-auto rounded-xl overflow-hidden border border-red-900/60 shadow-md bg-red-900/30">
+                      <img src="/images/ryosuke.jpg" alt="新郎 亮佑" className="w-full h-full object-cover" />
+                    </div>
+                    <div className="text-center pb-1 max-w-[280px] mx-auto border-b border-red-900/60">
+                      <span className="text-[10px] tracking-widest text-stone-400 block font-serif leading-none">GROOM</span>
+                      <span className="text-lg font-bold text-white font-serif">亮佑</span>
+                    </div>
+                    <div className="space-y-4 text-left max-w-[280px] mx-auto text-xs">
+                      <div className="space-y-1">
+                        <div className="inline-block px-2.5 py-0.5 bg-amber-100/15 text-[10px] text-amber-200 font-bold rounded-md tracking-wider border border-amber-100/10">生年月日</div>
+                        <p className="text-stone-200 font-medium pl-1 text-sm">1996年 11月 12日</p>
+                      </div>
+                      <div className="space-y-1">
+                        <div className="inline-block px-2.5 py-0.5 bg-amber-100/15 text-[10px] text-amber-200 font-bold rounded-md tracking-wider border border-amber-100/10">血液型</div>
+                        <p className="text-stone-200 font-medium pl-1 text-sm">A型</p>
+                      </div>
+                      <div className="space-y-1">
+                        <div className="inline-block px-2.5 py-0.5 bg-amber-100/15 text-[10px] text-amber-200 font-bold rounded-md tracking-wider border border-amber-100/10">趣味</div>
+                        <p className="text-stone-200 font-medium pl-1 text-sm">楽器演奏・スポーツ観戦</p>
+                      </div>
+                      <div className="space-y-1">
+                        <div className="inline-block px-2.5 py-0.5 bg-amber-100/15 text-[10px] text-amber-200 font-bold rounded-md tracking-wider border border-amber-100/10">好きな食べ物</div>
+                        <p className="text-stone-200 font-medium pl-1 text-sm">うどん・ビーフシチュー</p>
+                      </div>
+                    </div>
                   </div>
-                  <div className="space-y-1">
-                    <div className="inline-block px-2.5 py-0.5 bg-amber-100/15 text-[10px] text-amber-200 font-bold rounded-md tracking-wider border border-amber-100/10">血液型</div>
-                    <p className="text-stone-200 font-medium pl-1 text-sm">A型</p>
-                  </div>
-                  <div className="space-y-1">
-                    <div className="inline-block px-2.5 py-0.5 bg-amber-100/15 text-[10px] text-amber-200 font-bold rounded-md tracking-wider border border-amber-100/10">趣味</div>
-                    <p className="text-stone-200 font-medium pl-1 text-sm">楽器演奏・スポーツ観戦</p>
-                  </div>
-                  <div className="space-y-1">
-                    <div className="inline-block px-2.5 py-0.5 bg-amber-100/15 text-[10px] text-amber-200 font-bold rounded-md tracking-wider border border-amber-100/10">好きな食べ物</div>
-                    <p className="text-stone-200 font-medium pl-1 text-sm">うどん・ビーフシチュー</p>
+
+                  {/* 新婦 */}
+                  <div className="space-y-5">
+                    <div className="w-full max-w-[280px] aspect-[1/1] mx-auto rounded-xl overflow-hidden border border-red-900/60 shadow-md bg-red-900/30">
+                      <img src="/images/erika.jpg" alt="新婦 恵利佳" className="w-full h-full object-cover" />
+                    </div>
+                    <div className="text-center pb-1 max-w-[280px] mx-auto border-b border-red-900/60">
+                      <span className="text-[10px] tracking-widest text-stone-400 block font-serif leading-none">BRIDE</span>
+                      <span className="text-lg font-bold text-white font-serif">恵利佳</span>
+                    </div>
+                    <div className="space-y-4 text-left max-w-[280px] mx-auto text-xs">
+                      <div className="space-y-1">
+                        <div className="inline-block px-2.5 py-0.5 bg-amber-100/15 text-[10px] text-amber-200 font-bold rounded-md tracking-wider border border-amber-100/10">生年月日</div>
+                        <p className="text-stone-200 font-medium pl-1 text-sm">2000年 3月 25日</p>
+                      </div>
+                      <div className="space-y-1">
+                        <div className="inline-block px-2.5 py-0.5 bg-amber-100/15 text-[10px] text-amber-200 font-bold rounded-md tracking-wider border border-amber-100/10">血液型</div>
+                        <p className="text-stone-200 font-medium pl-1 text-sm">A型</p>
+                      </div>
+                      <div className="space-y-1">
+                        <div className="inline-block px-2.5 py-0.5 bg-amber-100/15 text-[10px] text-amber-200 font-bold rounded-md tracking-wider border border-amber-100/10">趣味</div>
+                        <p className="text-stone-200 font-medium pl-1 text-sm">楽器演奏・料理</p>
+                      </div>
+                      <div className="space-y-1">
+                        <div className="inline-block px-2.5 py-0.5 bg-amber-100/15 text-[10px] text-amber-200 font-bold rounded-md tracking-wider border border-amber-100/10">好きな食べ物</div>
+                        <p className="text-stone-200 font-medium pl-1 text-sm">ラーメン・パン</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              {/* === 新婦セクション === */}
-              <div className="space-y-5">
-                <div className="w-full max-w-[280px] aspect-[1/1] mx-auto rounded-xl overflow-hidden border border-red-900/60 shadow-md bg-red-900/30">
-                  <img src="/images/erika.jpg" alt="新婦 恵利佳" className="w-full h-full object-cover" />
-                </div>
-                <div className="text-center pb-1 max-w-[280px] mx-auto border-b border-red-900/60">
-                  <span className="text-[10px] tracking-widest text-stone-400 block font-serif leading-none">BRIDE</span>
-                  <span className="text-lg font-bold text-white font-serif">恵利佳</span>
-                </div>
-                <div className="space-y-4 text-left max-w-[280px] mx-auto text-xs">
-                  <div className="space-y-1">
-                    <div className="inline-block px-2.5 py-0.5 bg-amber-100/15 text-[10px] text-amber-200 font-bold rounded-md tracking-wider border border-amber-100/10">生年月日</div>
-                    <p className="text-stone-200 font-medium pl-1 text-sm">2000年 3月 25日</p>
-                  </div>
-                  <div className="space-y-1">
-                    <div className="inline-block px-2.5 py-0.5 bg-amber-100/15 text-[10px] text-amber-200 font-bold rounded-md tracking-wider border border-amber-100/10">血液型</div>
-                    <p className="text-stone-200 font-medium pl-1 text-sm">B型</p>
-                  </div>
-                  <div className="space-y-1">
-                    <div className="inline-block px-2.5 py-0.5 bg-amber-100/15 text-[10px] text-amber-200 font-bold rounded-md tracking-wider border border-amber-100/10">趣味</div>
-                    <p className="text-stone-200 font-medium pl-1 text-sm">楽器演奏・料理</p>
-                  </div>
-                  <div className="space-y-1">
-                    <div className="inline-block px-2.5 py-0.5 bg-amber-100/15 text-[10px] text-amber-200 font-bold rounded-md tracking-wider border border-amber-100/10">好きな食べ物</div>
-                    <p className="text-stone-200 font-medium pl-1 text-sm">ラーメン・パン</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {submitted ? (
-            <div className="text-center py-12 space-y-4">
-              <div className="text-amber-200 text-6xl animate-bounce">✓</div>
-              <h3 className="text-xl font-semibold text-white">ご回答ありがとうございました</h3>
-              <p className="text-sm text-stone-300 max-w-md mx-auto leading-relaxed">
-                新郎新婦へ情報が送信されました。<br />当日お会いできることを楽しみにしております。
-              </p>
-            </div>
-          ) : (
-            <>
               {/* 会場・日時情報セクション */}
               <div className="bg-black/15 rounded-xl p-5 sm:p-6 space-y-4 border border-red-900/40 text-sm text-stone-300">
                 <h3 className="font-bold text-base text-amber-100 border-b border-red-900/60 pb-2 font-serif tracking-wider">Information</h3>

@@ -1,11 +1,10 @@
-{"timestamp":"00:00:01.030","source":"Server","level":"LOG","message":""}
-{"timestamp":"00:00:13.203","source":"Browser","level":"INFO","message":"%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
-{"timestamp":"00:08:56.790","source":"Server","level":"LOG","message":"✓ Compiled in 51ms"}
-{"timestamp":"03:09:22.365","source":"Server","level":"LOG","message":"✓ Compiled in 38ms"}
-{"timestamp":"03:09:40.502","source":"Browser","level":"INFO","message":"%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
-{"timestamp":"03:25:56.161","source":"Server","level":"LOG","message":"✓ Compiled in 46ms"}
-{"timestamp":"03:26:36.804","source":"Browser","level":"LOG","message":"DynamoDBに保存されたデータ: {\"allergy\":null,\"attendance\":\"yes\",\"bus\":\"no\",\"createdAt\":\"2026-05-25T06:59:25.534Z\",\"email\":\"aaaa@a.com\",\"furigana\":\"aaaa\",\"id\":\"82dcc607-ceee-4959-94cf-0f8ae7d36055\",\"message\":null,\"name\":\"あああ\",\"side\":\"groom\",\"specialNotes\":null,\"updatedAt\":\"2026-05-25T06:59:25.534Z\"}"}
-{"timestamp":"03:27:43.463","source":"Server","level":"LOG","message":"✓ Compiled in 32ms"}
-{"timestamp":"03:27:54.070","source":"Server","level":"LOG","message":"✓ Compiled in 27ms"}
-{"timestamp":"03:28:11.306","source":"Server","level":"LOG","message":"✓ Compiled in 28ms"}
-{"timestamp":"03:28:27.085","source":"Server","level":"LOG","message":"✓ Compiled in 26ms"}
+{"timestamp":"00:00:01.067","source":"Server","level":"LOG","message":""}
+{"timestamp":"00:00:02.484","source":"Server","level":"WARN","message":"Amplify has not been configured. Please call Amplify.configure() before using this service."}
+{"timestamp":"00:00:02.677","source":"Browser","level":"INFO","message":"%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
+{"timestamp":"00:00:02.906","source":"Browser","level":"WARN","message":"Amplify has not been configured. Please call Amplify.configure() before using this service."}
+{"timestamp":"00:00:02.941","source":"Server","level":"WARN","message":"[browser] \"\\u001b[33mAmplify has not been configured. Please call Amplify.configure() before using this service.\\u001b[39m\" \"\\u001b[2m(app/admin/AdminForm.tsx:10:30)\\u001b[22m\""}
+{"timestamp":"00:00:02.942","source":"Browser","level":"WARN","message":"\u001b[33mAmplify has not been configured. Please call Amplify.configure() before using this service.\u001b[39m"}
+{"timestamp":"00:00:36.733","source":"Browser","level":"INFO","message":"%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
+{"timestamp":"00:00:36.753","source":"Server","level":"WARN","message":"[browser] \"\\u001b[33mAmplify has not been configured. Please call Amplify.configure() before using this service.\\u001b[39m\" \"\\u001b[2m(app/admin/AdminForm.tsx:10:30)\\u001b[22m\""}
+{"timestamp":"00:00:36.753","source":"Browser","level":"WARN","message":"\u001b[33mAmplify has not been configured. Please call Amplify.configure() before using this service.\u001b[39m"}
+{"timestamp":"00:00:36.753","source":"Browser","level":"WARN","message":"Amplify has not been configured. Please call Amplify.configure() before using this service."}

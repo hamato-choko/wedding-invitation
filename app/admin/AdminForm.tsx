@@ -10,7 +10,9 @@ import { withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 
 // クライアントの生成
-const client = generateClient<Schema>();
+const client = generateClient<Schema>({
+  authMode: 'userPool' // 💡 これを明示的に追加！ログインユーザーとしてアクセスすることを伝えます
+});
 
 function AdminForm({ signOut }: { signOut?: () => void }) {
   // 💡 必要な変数をすべてここで宣言します
@@ -84,7 +86,7 @@ function AdminForm({ signOut }: { signOut?: () => void }) {
     } catch (err) { alert("削除に失敗しました"); }
   };
 
-  const filteredRsvps = rsvps.filter(r => r.name.includes(searchTerm) || r.furigana.includes(searchTerm));
+  const filteredRsvps = rsvps.filter(r => r.name.includes(searchTerm) || r.furigana.includes(searchTerm) || r.address.includes(searchTerm));
 
   if (loading) {
     return <div className="p-8 text-center text-gray-500 font-medium">セキュリティチェック中...</div>;

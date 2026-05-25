@@ -667,10 +667,6 @@
     max-width: 50px;
   }
 
-  .max-w-\[150px\] {
-    max-width: 150px;
-  }
-
   .max-w-\[280px\] {
     max-width: 280px;
   }
@@ -1697,38 +1693,8 @@
   }
 
   @media (min-width: 40rem) {
-    .sm\:w-48 {
-      width: calc(var(--spacing) * 48);
-    }
-  }
-
-  @media (min-width: 40rem) {
-    .sm\:w-49 {
-      width: calc(var(--spacing) * 49);
-    }
-  }
-
-  @media (min-width: 40rem) {
-    .sm\:w-50 {
-      width: calc(var(--spacing) * 50);
-    }
-  }
-
-  @media (min-width: 40rem) {
     .sm\:w-52 {
       width: calc(var(--spacing) * 52);
-    }
-  }
-
-  @media (min-width: 40rem) {
-    .sm\:w-54 {
-      width: calc(var(--spacing) * 54);
-    }
-  }
-
-  @media (min-width: 40rem) {
-    .sm\:w-60 {
-      width: calc(var(--spacing) * 60);
     }
   }
 

@@ -93,15 +93,6 @@ export default function RsvpForm() {
         </div>
 
         <div className="p-6 sm:p-10 space-y-10">
-          {/* タイトル */}
-          <div className="text-center space-y-2">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-amber-100 tracking-wide">
-              Wedding Invitation
-            </h2>
-            <p className="text-xs font-medium text-stone-300 tracking-widest">
-              ご出欠のお伺い
-            </p>
-          </div>
 
           {/* 💡 注目ポイント：ここに新郎新婦の2人写真をベスト配置！ */}
           <div className="w-full px-2 sm:px-4">

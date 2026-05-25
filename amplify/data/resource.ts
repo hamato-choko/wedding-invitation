@@ -18,7 +18,7 @@ const schema = a.schema({
     })
     .authorization((allow) => [
       // 💡 1. ゲスト用：フォームからの送信（作成）だけを許可する（元に戻す）
-      allow.publicApiKey().to(['create']),
+      allow.publicApiKey(),
       // 💡 2. 管理者用：ログインしたユーザーにはすべての権限（読み書き・削除）を許可する
       allow.authenticated()
     ]),

@@ -129,6 +129,7 @@ export default function RsvpForm() {
                   Message
                 </h3>
                 <div className="text-sm sm:text-base text-stone-200 leading-loose tracking-widest space-y-6 font-serif">
+                  <p className="font-bold">謹啓</p>
                   <p>皆様いかがお過ごしでしょうか</p>
                   <p>このたび 結婚式を<br />執り行うこととなりました</p>
               
@@ -141,6 +142,7 @@ export default function RsvpForm() {
               <p>ご多用中 誠に恐縮ではございますが<br />
               ぜひご出席いただきたく<br />
               ご案内申し上げます</p>
+              <p className="font-bold">謹白</p>
                 </div>
               </div>
 
@@ -158,7 +160,7 @@ export default function RsvpForm() {
                     </div>
                     <div className="text-center pb-1 max-w-[280px] mx-auto border-b border-red-900/60">
                       <span className="text-[10px] tracking-widest text-stone-400 block font-serif leading-none">GROOM</span>
-                      <span className="text-lg font-bold text-white font-serif">亮佑</span>
+                      <span className="text-lg font-bold text-white font-serif">濵戸 亮佑</span>
                     </div>
                     <div className="space-y-4 text-left max-w-[280px] mx-auto text-xs">
                       <div className="space-y-1">
@@ -187,7 +189,7 @@ export default function RsvpForm() {
                     </div>
                     <div className="text-center pb-1 max-w-[280px] mx-auto border-b border-red-900/60">
                       <span className="text-[10px] tracking-widest text-stone-400 block font-serif leading-none">BRIDE</span>
-                      <span className="text-lg font-bold text-white font-serif">恵利佳</span>
+                      <span className="text-lg font-bold text-white font-serif">桂木 恵利佳</span>
                     </div>
                     <div className="space-y-4 text-left max-w-[280px] mx-auto text-xs">
                       <div className="space-y-1">
@@ -218,7 +220,7 @@ export default function RsvpForm() {
                   <span className="font-semibold text-stone-400">日時 / 集合時間</span>
                   <span className="sm:col-span-2 text-white font-medium">
                     2026年 8月 8日（土） <br />
-                    <span className="text-amber-200 font-bold">【受付開始】 13:00 </span> / 【挙式開始】 14:00
+                    <span className="text-amber-200 font-bold">【受付】 13:00 / 【挙式】 14:00 / 【披露宴】 15:00</span>
                   </span>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-2 border-t border-dashed border-red-900/40">
@@ -230,7 +232,7 @@ export default function RsvpForm() {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-2 border-t border-dashed border-red-900/40">
                   <span className="font-semibold text-stone-400">住所</span>
-                  <span className="sm:col-span-2 text-stone-300">〒650-0045 兵庫県神戸市中央区港島波止場2</span>
+                  <span className="sm:col-span-2 text-stone-300">〒650-0045 兵庫県神戸市中央区港島1-116</span>
                 </div>
                 <div className="w-full overflow-hidden rounded-lg border border-red-900/60 aspect-video mt-3 opacity-90">
                   <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3281.5634455047357!2d135.2023265!3d34.6657264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60008fa30bb1cc2f%3A0x5158554b8b78d2a!2z44Op44Op44K344Oj44Oz44K5S09CRe-8iOelnuaIuOW4giDntZDlqZrlvI_loLTvvIk!5e0!3m2!1sja!2sjp!4v1779037088985!5m2!1sja!2sjp" className="w-full h-full border-0" allowFullScreen={true} loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
@@ -255,10 +257,33 @@ export default function RsvpForm() {
               </div>
 
               {/* 入力フォーム */}
+              <div className="pt-8 pb-4 mb-0 text-center">
+                <h3 className="text-xl font-serif font-bold text-amber-100 tracking-wide">
+                  出席情報のご登録
+                </h3>
+                <p className="text-sm text-stone-200 leading-relaxed font-serif pt-8">
+                  お手数ではございますが、
+                  出席情報のご登録をお願い申し上げます。<br />
+                  <span className="text-amber-200 font-bold">回答期限：6月27日</span>
+                </p>
+              </div>
               <form className="space-y-6 pt-4 border-t border-red-900/60" onSubmit={handleSubmit}>
                 {error && <div className="bg-red-900/50 border-l-4 border-amber-200 p-4 text-sm text-stone-100 rounded-r-md">{error}</div>}
 
                 <div className="space-y-5">
+                  <div>
+                    <label className="block text-sm font-semibold text-stone-200">結婚式の出欠 <span className="text-amber-300">*</span></label>
+                    <div className="mt-2 flex items-center space-x-6 text-sm">
+                      <label className="inline-flex items-center cursor-pointer">
+                        <input type="radio" name="attendance" value="yes" checked={formData.attendance === "yes"} onChange={handleChange} className="h-4 w-4 accent-amber-200" />
+                        <span className="ml-2 text-white font-semibold">ご出席</span>
+                      </label>
+                      <label className="inline-flex items-center cursor-pointer">
+                        <input type="radio" name="attendance" value="no" checked={formData.attendance === "no"} onChange={handleChange} className="h-4 w-4 accent-amber-200" />
+                        <span className="ml-2 text-stone-300">ご欠席</span>
+                      </label>
+                    </div>
+                  </div>
                   <div>
                     <label className="block text-sm font-semibold text-stone-200">お名前 <span className="text-amber-300">*</span></label>
                     <input type="text" name="name" required value={formData.name} onChange={handleChange} className="mt-1 block w-full px-3 py-2 bg-red-950/60 border border-red-900/80 rounded-md text-sm text-white focus:outline-none focus:ring-1 focus:ring-amber-200 focus:border-amber-200" placeholder="山田 太郎" />
@@ -297,19 +322,6 @@ export default function RsvpForm() {
                     </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-stone-200">結婚式の出欠 <span className="text-amber-300">*</span></label>
-                    <div className="mt-2 flex items-center space-x-6 text-sm">
-                      <label className="inline-flex items-center cursor-pointer">
-                        <input type="radio" name="attendance" value="yes" checked={formData.attendance === "yes"} onChange={handleChange} className="h-4 w-4 accent-amber-200" />
-                        <span className="ml-2 text-white font-semibold">ご出席</span>
-                      </label>
-                      <label className="inline-flex items-center cursor-pointer">
-                        <input type="radio" name="attendance" value="no" checked={formData.attendance === "no"} onChange={handleChange} className="h-4 w-4 accent-amber-200" />
-                        <span className="ml-2 text-stone-300">ご欠席</span>
-                      </label>
-                    </div>
-                  </div>
-                  <div>
                     <label className="block text-sm font-semibold text-stone-200">送迎バスの利用</label>
                     <select name="bus" value={formData.bus} onChange={handleChange} className="mt-1 block w-full py-2 px-3 border border-red-900/80 bg-red-950/80 rounded-md text-sm text-white focus:outline-none focus:ring-1 focus:ring-amber-200">
                       <option value="no" className="bg-red-950 text-white">不要（自家用車・公共交通機関など）</option>
@@ -322,7 +334,7 @@ export default function RsvpForm() {
                       <p className="font-semibold text-amber-200">【ご記入の凡例】</p>
                       <ul className="list-disc pl-4 space-y-0.5 text-stone-400">
                         <li>アレルギー： エビ・カニ（出汁もNG）、小麦アレルギー 等</li>
-                        <li>苦手な食べ物： 生魚が苦手（火が通っていればOK）、加熱した椎茸 等</li>
+                        <li>苦手な食べ物： 生魚が苦手（火が通っていればOK） 等</li>
                       </ul>
                       <p className="text-[11px] text-stone-500 pt-1">※重度のアレルギー等, 調理器具の洗浄レベルから配慮が必要な場合はその旨もご記載ください。</p>
                     </div>

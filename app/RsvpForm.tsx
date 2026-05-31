@@ -52,7 +52,7 @@ export default function RsvpForm() {
     return (
       <div className="fixed inset-0 bg-red-950 z-[9999] flex flex-col items-center justify-center p-6 text-stone-100">
         <div className="text-center space-y-6 max-w-sm">
-          <div className="text-amber-200 text-6xl">⚠️</div>
+          <div className="text-amber-200 text-4xl">🙇‍♂️🙇‍♀️</div>
           <h2 className="text-2xl font-serif font-bold">ブラウザの切り替えが必要です</h2>
           <p className="text-sm leading-relaxed text-stone-300">
             現在LINEアプリ内のブラウザで開かれています。<br />
@@ -141,7 +141,7 @@ export default function RsvpForm() {
               </h3>
               <div className="text-sm sm:text-base text-stone-300 max-w-md mx-auto leading-relaxed space-y-2 font-serif">
                 <p>ご出欠の回答を無事に受け付けました。</p>
-                <p>お忙しい中ご回答いただき<br />誠にありがとうございました。</p>
+                <p>おいそがしい中ご回答いただき<br />誠にありがとうございました</p>
               </div>
             </div>
           ) : (

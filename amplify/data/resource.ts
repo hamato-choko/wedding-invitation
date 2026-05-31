@@ -1,33 +1,37 @@
 // amplify/data/resource.ts
 import { type ClientSchema, a, defineData } from '@aws-amplify/backend';
 
-// 1. 招待状用のデータモデル（DynamoDBのテーブル構造）を定義
 const schema = a.schema({
   Rsvp: a
     .model({
-      name: a.string().required(),         // お名前（必須）
-      furigana: a.string().required(),     // フリガナ（必須）
-      email: a.string(),                   // メールアドレス
-      address: a.string().required(),      // 住所(必須)
-      side: a.string().required(),         // 新郎側(groom) / 新婦側(bride)（必須）
-      attendance: a.string().required(),   // ご出席(yes) / ご欠席(no)（必須）
-      bus: a.string().required(),          // 送迎バス 必要(yes) / 不要(no)（必須）
-      allergy: a.string(),                 // アレルギー・苦手な食べ物
-      specialNotes: a.string(),            // 特記事項・ご要望
-      message: a.string(),                 // 新郎新婦へのメッセージ
+      // ...フィールド定義はそのまま
+      name: a.string().required(),
+      furigana: a.string().required(),
+      email: a.string(),
+      address: a.string().required(),
+      side: a.string().required(),
+      attendance: a.string().required(),
+      bus: a.string().required(),
+      allergy: a.string(),
+      specialNotes: a.string(),
+      message: a.string(),
     })
     .authorization((allow) => [
-      // 💡 1. ゲスト用：フォームからの送信（作成）だけを許可する（元に戻す）
-      // allow.publicApiKey(),
-      // 💡 2. 管理者用：ログインしたユーザーにはすべての権限（読み書き・削除）を許可する
-      allow.authenticated()
+      // 💡 1. 誰でも（APIキーを使って）データを作成できるように許可する
+      allow.publicApiKey().to(['create']),
+      // 💡 2. ログインユーザーはすべての操作が可能
+      allow.authenticated(),
     ]),
 });
 
 export const data = defineData({
   schema,
   authorizationModes: {
-    defaultAuthorizationMode: 'userPool', // 💡 デフォルト認証を userPool に指定
+    // 💡 認証モードに apiKey を追加する
+    defaultAuthorizationMode: 'apiKey', 
+    apiKeyAuthorizationMode: {
+      expiresInDays: 100, // 必要に応じて調整
+    },
   },
 });
 

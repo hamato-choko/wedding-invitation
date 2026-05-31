@@ -1,7 +1,7 @@
 // app/RsvpForm.tsx
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Amplify } from "aws-amplify";
 // AmplifyのAPIクライアントをインポート
 import { generateClient } from "aws-amplify/data";
@@ -14,6 +14,9 @@ Amplify.configure(outputs);
 const client = generateClient<Schema>();
 
 export default function RsvpForm() {
+  // --- 1. ここに判定用のStateを追加 ---
+  const [isLineBrowser, setIsLineBrowser] = useState<boolean | null>(null);
+
   const [formData, setFormData] = useState({
     name: "",
     furigana: "",
@@ -30,6 +33,38 @@ export default function RsvpForm() {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // --- 2. ページ読み込み時にLINEブラウザかどうかを判定 ---
+  // 注意: useEffect は import { useEffect } from "react"; が必要です
+  // ファイル上部の import 文に追加してください
+
+// LINEブラウザ判定処理
+  useEffect(() => {
+    const ua = window.navigator.userAgent.toLowerCase();
+    setIsLineBrowser(ua.includes("line"));
+  }, []);
+
+  // 判定がまだ終わっていない場合は何も表示しない（ちらつき防止）
+  if (isLineBrowser === null) return null;
+
+// LINEブラウザだった場合、画面全体をブロックして誘導を表示
+  if (isLineBrowser) {
+    return (
+      <div className="fixed inset-0 bg-red-950 z-[9999] flex flex-col items-center justify-center p-6 text-stone-100">
+        <div className="text-center space-y-6 max-w-sm">
+          <div className="text-amber-200 text-6xl">⚠️</div>
+          <h2 className="text-2xl font-serif font-bold">ブラウザの切り替えが必要です</h2>
+          <p className="text-sm leading-relaxed text-stone-300">
+            現在LINEアプリ内のブラウザで開かれています。<br />
+            このままでは出席登録が正常に行えません。<br /><br />
+            お手数ですが、画面右上の「…」またはブラウザアイコンをタップし、<br />
+            <span className="text-amber-200 font-bold">「Safariで開く」または「ブラウザで開く」</span><br />
+            を選択してください。
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   const handleChange = (
     e: React.ChangeEvent<
